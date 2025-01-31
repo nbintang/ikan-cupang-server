@@ -1,13 +1,17 @@
-import { Hono } from 'hono'
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { csrf } from "hono/csrf";
+import { logger } from "hono/logger";
+import mainRoutes, { introductions } from "@/routes";
+const app = new Hono();
 
-const app = new Hono()
+app.use(logger()); 
+app.use("/api/*", cors({ origin: "http://localhost:3000" }));
+app.get("/", introductions);
 
-app.get('/', (c) => {
+app.route("/api", mainRoutes);
 
-  const payload = {
-    message: 'Hello Hono!',
-  }
-  return c.json(payload)
-})
-
-export default app
+export default {
+  fetch: app.fetch,
+  port: 5000,
+};
