@@ -1,0 +1,17 @@
+{
+  "name": "ikan-cupang",
+  "scripts": {
+    "dev": "bun run --hot src/server.ts"
+  },
+  "prisma":{
+    "seed": "bun run prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.3.0",
+    "hono": "^4.6.19"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prisma": "^6.3.0"
+  }
+}
