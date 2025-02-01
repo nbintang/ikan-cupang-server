@@ -8,9 +8,9 @@ import {
 } from "./auth.repository";
 import { HTTPException } from "hono/http-exception";
 import { hashToken, verifyHashedToken } from "@/helpers/tokenHashes";
-import { generateOtps } from "@/helpers/otp";
+import { generateOtps } from "@/helpers/generateOtps";
 import sendTokenThroughEmail from "@/lib/mail";
-import { generateAccessToken, generateTokens, verifyJWT } from "@/helpers/jwt";
+import { generateAccessToken, generateTokens, verifyJWT } from "@/helpers/generateJwtTokens";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 
 export async function loginServices(c: Context) {
@@ -94,13 +94,12 @@ export async function verifyOtp(c: Context) {
 
 export async function resendOtp(c: Context) {
   const { email } = await c.req.json();
-
   const user = await findUserByEmail(email);
   if (!user) throw new HTTPException(404, { message: "User Not Found" });
+  await deleteAllTokensByUserEmail(user.email) ;
 
   const { otp, expiresAt } = generateOtps();
   const hashedToken = await hashToken(otp);
-  await deleteAllTokensByUserEmail(email);
   const token = await createToken({
     token: hashedToken,
     user: {

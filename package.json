@@ -9,11 +9,14 @@
   "dependencies": {
     "@hono/zod-validator": "^0.4.2",
     "@prisma/client": "^6.3.0",
+    "cloudinary": "^2.5.1",
+    "cloudinary-build-url": "^0.2.4",
     "hono": "^4.6.19",
     "nodemailer": "^6.10.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@cld-apis/types": "^0.1.6",
     "@types/bun": "latest",
     "@types/nodemailer": "^6.4.17",
     "prisma": "^6.3.0"

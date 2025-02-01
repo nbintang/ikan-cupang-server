@@ -1,4 +1,4 @@
-import { verifyJWT } from "@/helpers/jwt";
+import { verifyJWT } from "@/helpers/generateJwtTokens";
 import { bearerAuth } from "hono/bearer-auth";
 
 export const bearerAuthMiddleware = bearerAuth({

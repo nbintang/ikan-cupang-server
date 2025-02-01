@@ -1,6 +1,6 @@
 import db from "@/lib/db";
+import { PaginationProps } from "@/types";
 import { Prisma } from "@prisma/client";
-type PaginationProps = { page: number; limit: number };
 export const findUsers = async ({ page, limit }: PaginationProps) =>
   await db.user.findMany({
     where: { role: "USER" },

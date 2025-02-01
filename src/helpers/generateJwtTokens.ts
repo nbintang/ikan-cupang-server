@@ -19,7 +19,7 @@ export const verifyJWT = async (token: string) => {
 export const generateAccessToken = async (payload: JWTPayload) => {
   const opts: JWTPayload = {
     ...payload,
-    exp: Math.floor(Date.now() / 1000) + 30, // 30 sec
+    exp: Math.floor(Date.now() / 1000) + 30, 
   };
   const accessToken = await signJWT(opts);
   return accessToken;
@@ -28,7 +28,7 @@ export const generateAccessToken = async (payload: JWTPayload) => {
 export const generateRefreshToken = async (payload: JWTPayload) => {
   const opts: JWTPayload = {
     ...payload,
-    exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 1, // 1 days
+    exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 1, 
   };
   const refreshToken = await signJWT(opts);
   return refreshToken;
