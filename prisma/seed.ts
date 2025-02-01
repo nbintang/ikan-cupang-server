@@ -1,60 +1,21 @@
-import { PrismaClient } from '@prisma/client';
-
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  // Buat admin dan user
-  const admin = await prisma.user.upsert({
-    where: { email: 'admin@example.com' },
-    update: {},
-    create: {
-      name: 'Admin',
-      email: 'admin@example.com',
-      role: 'ADMIN',
-    },
-  });
-
-  const user = await prisma.user.upsert({
-    where: { email: 'user@example.com' },
-    update: {},
-    create: {
-      name: 'User',
-      email: 'user@example.com',
-      role: 'USER',
-    },
-  });
-
-  // Buat kategori ikan cupang
-  const categories = await prisma.category.createMany({
-    data: [
-      { name: 'Plakat' },
-      { name: 'Halfmoon' },
-      { name: 'Crowntail' },
-    ],
-    skipDuplicates: true,
-  });
-
-  // Ambil kategori untuk referensi ikan
-  const plakat = await prisma.category.findFirst({ where: { name: 'Plakat' } });
-
-  // Buat ikan cupang contoh
-  if (plakat) {
-    await prisma.fish.createMany({
-      data: [
-        {
-          name: 'Plakat Red Dragon',
-          description: 'Ikan cupang dengan warna merah menyala.',
-          price: 50000,
-          stock: 10,
-          imageUrl: 'https://example.com/red-dragon.jpg',
-          categoryId: plakat.id,
-        },
-      ],
+  let result = [];
+  for (let i = 0; i < 20; i++) {
+    const users = await prisma.user.create({
+      data: {
+        name: `User ${i}`,
+        email: `user${i}@example.com`,
+      },
     });
+
+    result.push(users);
   }
 
-  console.log({ admin, user, categories });
+  console.log(result);
 }
 
 main()

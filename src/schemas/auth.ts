@@ -12,5 +12,4 @@ export const otpSchema = z.object({
     .refine((val) => !Number.isNaN(parseInt(val)), {
       message: "Expected number, received a string",
     })
-    
 });
