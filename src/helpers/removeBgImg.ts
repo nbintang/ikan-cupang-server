@@ -1,4 +1,4 @@
-async function removeBg(file: File) {
+export async function removeBgImg(file: File) {
     const formData = new FormData();
     formData.append("size", "auto");
     formData.append("image_file", file);
@@ -13,5 +13,4 @@ async function removeBg(file: File) {
     return await response.arrayBuffer();
   }
   
-  export default removeBg;
   

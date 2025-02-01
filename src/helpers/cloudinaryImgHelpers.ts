@@ -7,7 +7,7 @@ interface ManageCloudinaryImages {
 }
 type CloudinaryResponse = { secure_url: string; public_id: string };
 
-export default async function updateCloudinaryImages({
+export async function updateCloudinaryImages({
   buffer,
   folder = "ikan-cupang",
   public_id,

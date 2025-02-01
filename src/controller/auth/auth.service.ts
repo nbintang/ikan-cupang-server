@@ -7,10 +7,15 @@ import {
   updateVerifiedUser,
 } from "./auth.repository";
 import { HTTPException } from "hono/http-exception";
-import { hashToken, verifyHashedToken } from "@/helpers/tokenHashes";
-import { generateOtps } from "@/helpers/generateOtps";
 import sendTokenThroughEmail from "@/lib/mail";
-import { generateAccessToken, generateTokens, verifyJWT } from "@/helpers/generateJwtTokens";
+import {
+  generateAccessToken,
+  generateOtps,
+  generateTokens,
+  verifyJWT,
+  hashToken,
+  verifyHashedToken,
+} from "@/helpers";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 
 export async function loginServices(c: Context) {
@@ -96,7 +101,7 @@ export async function resendOtp(c: Context) {
   const { email } = await c.req.json();
   const user = await findUserByEmail(email);
   if (!user) throw new HTTPException(404, { message: "User Not Found" });
-  await deleteAllTokensByUserEmail(user.email) ;
+  await deleteAllTokensByUserEmail(user.email);
 
   const { otp, expiresAt } = generateOtps();
   const hashedToken = await hashToken(otp);

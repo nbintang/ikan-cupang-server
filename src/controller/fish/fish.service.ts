@@ -7,12 +7,12 @@ import {
   updateFishById,
 } from "./fish.repository";
 import { HTTPException } from "hono/http-exception";
-import { Prisma } from "@prisma/client";
 import { FishSchema } from "@/schemas/fish";
-import updateCloudinaryImages, {
+import  {
+  updateCloudinaryImages,
   uploadImgToCloudinary,
-} from "@/helpers/cloudinaryImgHelpers";
-import removeBg from "@/helpers/removeBgImg";
+  removeBgImg
+} from "@/helpers";
 import { extractPublicId } from "cloudinary-build-url";
 
 export async function getFishes(c: Context) {
@@ -28,7 +28,7 @@ export async function getFishes(c: Context) {
 export async function createFish(c: Context, data: FishSchema) {
   const { name, price, stock, description, category, imageUrl } = await data;
 
-  const bgRemovedBuffer = await removeBg(imageUrl as File);
+  const bgRemovedBuffer = await removeBgImg(imageUrl as File);
   if (!bgRemovedBuffer)
     throw new HTTPException(500, { message: "Failed to remove background" });
 
@@ -75,7 +75,7 @@ export async function patchFishById(c: Context, data: FishSchema) {
   if (!existedFish || !existedFish.imageUrl)
     throw new HTTPException(404, { message: "Fish Not Found" });
   const publicIdImg = extractPublicId(existedFish.imageUrl);
-  const bgRemovedBuffer = await removeBg(imageUrl as File);
+  const bgRemovedBuffer = await removeBgImg(imageUrl as File);
   if (!bgRemovedBuffer)
     throw new HTTPException(500, { message: "Failed to remove background" });
 
