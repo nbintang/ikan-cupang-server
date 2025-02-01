@@ -7,7 +7,6 @@ const mainRoutes = new Hono();
 mainRoutes.get("/", (c) => {
   return c.text("Hello Hono!");
 });
-mainRoutes.post("/refresh-token", refreshToken );
 mainRoutes.route("/auth", authRoutes);
 mainRoutes.route("/protected", protectedRoutes);
 export default mainRoutes;
@@ -15,7 +14,7 @@ export const introductions = (c: Context) => {
   const payload = {
     message: "See Our API through Here!",
   };
-  const url = "/api/auth/login";
+  const url = "/api";
   return c.html(
     html`<html>
       <head>
