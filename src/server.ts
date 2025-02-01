@@ -12,5 +12,5 @@ app.route("/api", mainRoutes);
 
 export default {
   fetch: app.fetch,
-  port: 5000,
+  port: 3000,
 };

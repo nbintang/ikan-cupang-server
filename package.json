@@ -1,7 +1,8 @@
 {
   "name": "ikan-cupang",
   "scripts": {
-    "dev": "bun run --watch src/server.ts"
+    "dev": "bun run --watch src/server.ts",
+    "start": "bun run src/server.ts"
   },
   "prisma": {
     "seed": "bun run prisma/seed.ts"
