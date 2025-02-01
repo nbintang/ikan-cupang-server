@@ -3,7 +3,7 @@ import { zValidator } from "@hono/zod-validator";
 import { ValidationTargets } from "hono";
 import {  ZodType } from "zod";
 
- function customZodValidator(target: keyof ValidationTargets, schema: ZodType<any>) {
+export  function customZodValidator(target: keyof ValidationTargets, schema: ZodType<any>) {
    return  zValidator(target, schema, (result, c) => {
     if (!result.success) {
       const messages = result.error.issues.map((issue) => {
@@ -17,5 +17,3 @@ import {  ZodType } from "zod";
   })
       
 }
-
- export default customZodValidator

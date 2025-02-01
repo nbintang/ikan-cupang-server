@@ -1,5 +1,5 @@
 import { createFish, getFishById, getFishes, patchFishById, removeFishById } from "@/controller/fish";
-import customZodValidator from "@/helpers/customZodValidator";
+import {customZodValidator} from "@/helpers";
 import { fishSchema } from "@/schemas/fish";
 import { Hono } from "hono";
 

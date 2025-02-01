@@ -4,7 +4,7 @@ import {
   patchUserById,
   removeUserById,
 } from "@/controller/user";
-import customZodValidator from "@/helpers/customZodValidator";
+import {customZodValidator} from "@/helpers";
 import { userSchema } from "@/schemas/user";
 import { Hono } from "hono";
 
