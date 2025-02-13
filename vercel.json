@@ -12,5 +12,6 @@
       "dest": "src/server.ts",
       "methods": ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
     }
-  ]
+  ],
+  "buildCommand": "bun install && bun run build"
 }
