@@ -10,7 +10,4 @@ app.get("/", introductions);
 
 app.route("/api", mainRoutes);
 
-export default {
-  fetch: app.fetch,
-  port: 3000,
-};
+export default app
