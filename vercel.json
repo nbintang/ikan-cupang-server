@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "src/server.ts",
-      "use": "@vercel/node"
-    }
-  ],
   "routes": [
     {
       "src": "/(.*)",
@@ -13,5 +7,6 @@
       "methods": ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
     }
   ],
-  "buildCommand": "bun install && bun run build"
+  "installCommand": "bun install",
+  "buildCommand": "bun run build"
 }
